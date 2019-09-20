@@ -73,7 +73,7 @@ testr <- new.env()
 
         compares <- new.env()
 
-        # Geneeral Equivalency cComparisons
+        # Geneeral Equivalency Matchers
         compares$toEqual <- compareHandler(
             'to equal',
             function(v2) { return(resultValue == v2) }
@@ -83,7 +83,7 @@ testr <- new.env()
             function(v2) { return(resultValue != v2) }
         )
 
-        # Numerical Comparisons
+        # Numerical Matchers
         compares$toBeLessThan <- compareHandler(
             'to be less than',
             function(v2) { return(resultValue < v2) }
@@ -105,7 +105,7 @@ testr <- new.env()
         #     function(v2) { return() }
         # )
 
-        # Boolean Comparisons
+        # Boolean Matchers
         compares$toBeTrue <- compareHandler(
             'to be true',
             function() { return(resultValue == TRUE) }
@@ -123,15 +123,31 @@ testr <- new.env()
             function() { return(as.logical(resultValue) == FALSE) }
         )
 
-        # Type Comparisons
+        # Type Matchers
         compares$toBeInstanceOf <- compareHandler(
             'to be an instance of'
             function(v2) { return(is(resultValue, v2)) }
         )
 
-        # TODO: List Comparisons
+        # List Matchers
+        compares$toHaveLength <- compareHandler(
+            'to have length'
+            function(v2) { return(length(resultValue) == v2) }
+        )
+        compares$toContain <- compareHandler(
+            'to contain'
+            function(v2) {
+                result <- FALSE
 
-        # Exception Comparisons
+                for(v in list) {
+                    if (v == val) { result <- TRUE }
+                }
+
+                return(result)
+            }
+        )
+
+        # Exception Matchers
         compares$toThrowAnError <- compareHandler(
             'to throw an error',
             function(cb) {
