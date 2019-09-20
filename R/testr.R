@@ -1,5 +1,3 @@
-testr <- new.env()
-
 (function() {
     # #####################################################################################################################
     # Private testr variables and utility methods.
@@ -182,7 +180,7 @@ testr <- new.env()
     # Describe block for grouping similar tests.
     # @param [String] description - Short description, like the name of the file or name of the function being tested.
     # @param [Function] cb - Callback function that holds the methods to test specific aspecs of the described entity.
-    testr$describe <- function(description, cb) {
+    describe <<- function(description, cb) {
         private$describePassing <- TRUE
         private$describeScopeActive <- TRUE
 
@@ -202,7 +200,7 @@ testr <- new.env()
     # @param [String] description - Short description about what specific functionality is being tested.
     # @param [Function] cb - Callback function that returns a boolean signifying if the test passed or not.
     # it MUST be called inside of a 'describe' callback function or the tests will not execute properly.
-    testr$it <- function(description, cb) {
+    it <<- function(description, cb) {
         if (private$describeScopeActive == FALSE) {
             throw('it test calls must be placed inside of a describe block.')
         }
@@ -223,7 +221,7 @@ testr <- new.env()
 
     # Detail a specific condition to compare within an 'it' block. Can have multiple 'expect' statements inside one 'it' block.
     # expect MUST be called inside of an 'it' callback function or the tests will not execute properly.
-    testr$expect <- function(value) {
+    expect <<- function(value) {
         if (private$itScopeActive == FALSE) {
             throw('expect test calls must be placed inside of a describe block.')
         }
@@ -231,8 +229,3 @@ testr <- new.env()
         return(private$expectCompareBuilder(value))
     }
 })()
-
-# Expose the testing methods.
-describe <- testr$describe
-it <- testr$it
-expect <- testr$expect
