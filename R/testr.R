@@ -23,7 +23,7 @@ testr <- new.env()
 
     # Print output and reset for next test block.
     private$printOutput <- function() {
-        outputLines = length(private$outputBlock)
+        outputLines <- length(private$outputBlock)
         print(private$outputBlock[outputLines])
 
         exceptions <- c()
@@ -73,7 +73,7 @@ testr <- new.env()
 
         compares <- new.env()
 
-        # Add the different types of comparisons that you want to be able to do here for easy, reusable code.
+        # Geneeral Equivalency cComparisons
         compares$toEqual <- compareHandler(
             'to equal',
             function(v2) { return(resultValue == v2) }
@@ -82,6 +82,8 @@ testr <- new.env()
             'to not equal',
             function(v2) { return(resultValue != v2) }
         )
+
+        # Numerical Comparisons
         compares$toBeLessThan <- compareHandler(
             'to be less than',
             function(v2) { return(resultValue < v2) }
@@ -98,6 +100,26 @@ testr <- new.env()
             'to be greater than or equal to',
             function(v2) { return(resultValue >= v2) }
         )
+        # compares$toBeCloseTo <- compareHandler(
+        #     'to be close to',
+        #     function(v2) { return() }
+        # )
+
+        # Boolean Comparisons
+        compares$toBeTruthy <- compareHandler(
+            'to be truthy',
+            function(v2) { return(as.logical(v2) == TRUE) }
+        )
+        compares$toBeTruthy <- compareHandler(
+            'to be falsy',
+            function(v2) { return(as.logical(v2) == FALSE) }
+        )
+
+        # TODO: Type Comparisons
+
+        # TODO: List Comparisons
+
+        # Exception Comparisons
         compares$toThrowAnError <- compareHandler(
             'to throw an error',
             function(cb) {
