@@ -106,16 +106,28 @@ testr <- new.env()
         # )
 
         # Boolean Comparisons
+        compares$toBeTrue <- compareHandler(
+            'to be true',
+            function() { return(resultValue == TRUE) }
+        )
+        compares$toBeFalse <- compareHandler(
+            'to be false',
+            function() { return(resultValue == FALSE) }
+        )
         compares$toBeTruthy <- compareHandler(
             'to be truthy',
-            function(v2) { return(as.logical(v2) == TRUE) }
+            function() { return(as.logical(resultValue) == TRUE) }
         )
-        compares$toBeTruthy <- compareHandler(
+        compares$toBeFalsy <- compareHandler(
             'to be falsy',
-            function(v2) { return(as.logical(v2) == FALSE) }
+            function() { return(as.logical(resultValue) == FALSE) }
         )
 
-        # TODO: Type Comparisons
+        # Type Comparisons
+        compares$toBeInstanceOf <- compareHandler(
+            'to be an instance of'
+            function(v2) { return(is(resultValue, v2)) }
+        )
 
         # TODO: List Comparisons
 
