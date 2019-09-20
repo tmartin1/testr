@@ -8,10 +8,12 @@ A Simple unit testing utility for R.
 Import `testr` and the file to be tested into the spec file. Then use the testr methods in the structure shown below to test the imported function.
 
 ### Methods
-* `describe` - Initialize a test suite and for grouping similar tests (like a specific method). Takes two parameters: a string to describe what is being tested, and a callback function, which holds the logic to define any variables needed by the tests and define the specific tests themselves, signified by `it` calls.
-* `it` - Test a specific method, or a specific part of a method. `it` calls must be inside of a `describe` callback function. Takes two parameters: a string to describe the specific functionality that is being tested, and a callback function, which holds the logic to setup the specific test parameters and execute the condition tests by calling the `expect` function.
-* `expect` - Defines a specific condition that needs to be met for the test to pass. `expect` calls must be inside of an `it` callback function. You can have more than one `expect` call inside a single `it` callback.
 
+This package exposes the following global methods:
+
+* **`describe`** - Initialize a test suite and for grouping similar tests (like a specific method). Takes two parameters: a string to describe what is being tested, and a callback function, which holds the logic to define any variables needed by the tests and define the specific tests themselves, signified by `it` calls.
+* **`it`** - Test a specific method, or a specific part of a method. `it` calls must be inside of a `describe` callback function. Takes two parameters: a string to describe the specific functionality that is being tested, and a callback function, which holds the logic to setup the specific test parameters and execute the condition tests by calling the `expect` function.
+* **`expect`** - Defines a specific condition that needs to be met for the test to pass. `expect` calls must be inside of an `it` callback function. You can have more than one `expect` call inside a single `it` callback.
 
 ### Example
 ```R
